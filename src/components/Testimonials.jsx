@@ -17,8 +17,7 @@ export default function Example() {
         <figure className="mt-10">
           <blockquote className={isDark ? 'text-center text-xl/8 font-semibold text-white sm:text-2xl/9' : 'text-center text-xl/8 font-semibold text-gray-900 sm:text-2xl/9'}>
             <p>
-              “Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias
-              molestiae. Numquam corrupti in laborum sed rerum et corporis.”
+              “Workcation has redefined how our team works and recharges. Its simple, reliable tools make planning productive offsites effortless, keeping focus high and morale even higher.”
             </p>
           </blockquote>
           <figcaption className="mt-10">
@@ -28,7 +27,7 @@ export default function Example() {
               className="mx-auto size-10 rounded-full"
             />
             <div className="mt-4 flex items-center justify-center space-x-3 text-base">
-              <div className={isDark ? 'font-semibold text-white' : 'font-semibold text-gray-900'}>Judith Black</div>
+              <div className={isDark ? 'font-semibold text-white' : 'font-semibold text-gray-900'}> Leslie Alexander</div>
               <svg width={3} height={3} viewBox="0 0 2 2" aria-hidden="true" className={isDark ? 'fill-white' : 'fill-gray-900'}>
                 <circle r={1} cx={1} cy={1} />
               </svg>
