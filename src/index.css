@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* Pour le mode sombre */
+.dark body {
+  background-color: #111827; /* bg-gray-900 */
+}
+
+/* Pour le mode clair */
+body {
+  background-color: #ffffff; /* bg-white */
+}

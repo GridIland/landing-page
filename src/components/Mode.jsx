@@ -1,29 +1,41 @@
-import { useEffect, useState } from "react";
+import { createContext, useContext, useState, useEffect } from 'react';
 
-export default function Mode() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme");
-      if (saved === "dark" || saved === "light") return saved;
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-        return "dark";
+const ThemeContext = createContext();
+
+export const ThemeProvider = ({ children }) => {
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved === 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
-    return "light";
+    return false;
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+  };
 
   return (
-    <button
-      onClick={toggle}
-      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-xl"
-    >
-      {theme === "dark" ? "☀️" : "🌙"}
-    </button>
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
-}
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
+  return context;
+};

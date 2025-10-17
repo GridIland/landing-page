@@ -1,68 +1,58 @@
+import React from 'react'
 import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
+import { useTheme } from './Mode'
 
-export default function Example() {
-    return (
-        <div className="relative isolate overflow-hidden py-16 sm:py-24 lg:py-32">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-                    <div className="max-w-xl lg:max-w-lg">
-                        <h2 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white dark:text-white">Subscribe to our newsletter</h2>
-                        <p className="mt-4 text-lg text-gray-300">
-                            Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing velit quis. Duis tempor incididunt
-                            dolore.
-                        </p>
-                        <div className="mt-6 flex max-w-md gap-x-4">
-                            <label htmlFor="email-address" className="sr-only">
-                                Email address
-                            </label>
-                            <input
-                                id="email-address"
-                                name="email"
-                                type="email"
-                                required
-                                placeholder="Enter your email"
-                                autoComplete="email"
-                                className="min-w-0 flex-auto rounded-md px-3.5 py-2 text-base text-gray-900 dark:text-white dark:text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                            />
-                            <button
-                                type="submit"
-                                className="flex-none rounded-md bg-transparent px-3.5 py-2.5 text-sm font-semibold text-gray-900 dark:text-white dark:text-white shadow-xs hover:bg-transparent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                            >
-                                Subscribe
-                            </button>
-                        </div>
-                    </div>
-                    <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
-                        <div className="flex flex-col items-start">
-                            <div className="rounded-md bg-transparent p-2 ring-1 ring-white/10">
-                                <CalendarDaysIcon aria-hidden="true" className="size-6 text-gray-900 dark:text-white dark:text-white" />
-                            </div>
-                            <dt className="mt-4 text-base font-semibold text-gray-900 dark:text-white dark:text-white">Weekly articles</dt>
-                            <dd className="mt-2 text-base/7 text-gray-400">
-                                Non laboris consequat cupidatat laborum magna. Eiusmod non irure cupidatat duis commodo amet.
-                            </dd>
-                        </div>
-                        <div className="flex flex-col items-start">
-                            <div className="rounded-md bg-transparent p-2 ring-1 ring-white/10">
-                                <HandRaisedIcon aria-hidden="true" className="size-6 text-gray-900 dark:text-white dark:text-white" />
-                            </div>
-                            <dt className="mt-4 text-base font-semibold text-gray-900 dark:text-white dark:text-white">No spam</dt>
-                            <dd className="mt-2 text-base/7 text-gray-400">
-                                Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.
-                            </dd>
-                        </div>
-                    </dl>
-                </div>
+export default function Newsletter() {
+  const { isDark } = useTheme()
+
+  const container = isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'
+  const inputBase = 'w-full rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+  const inputLight = 'bg-white border border-gray-200 text-gray-900 placeholder-gray-500'
+  const inputDark = 'bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-400'
+  const btn = isDark ? 'bg-indigo-500 hover:bg-indigo-400 text-white' : 'bg-indigo-600 hover:bg-indigo-500 text-white'
+  const hint = isDark ? 'text-gray-400' : 'text-gray-600'
+
+  return (
+    <section className={`${container} py-12`}>
+      <div className="mx-auto max-w-3xl px-6">
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <div>
+            <h2 className={`text-2xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Get our newsletter</h2>
+            <p className={`mt-2 text-sm ${hint}`}>Join our mailing list to receive the latest updates and offers.</p>
+          </div>
+
+          <form
+            className="mt-6 sm:mt-0 sm:ml-6 sm:flex sm:items-center"
+            onSubmit={(e) => {
+              e.preventDefault()
+            }}
+          >
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <div className="w-full sm:w-auto sm:flex-1">
+              <input
+                id="newsletter-email"
+                type="email"
+                placeholder="you@example.com"
+                className={`${inputBase} ${isDark ? inputDark : inputLight}`}
+              />
             </div>
-            <div aria-hidden="true" className="absolute top-0 left-1/2 -z-10 -translate-x-1/2 blur-3xl xl:-top-6">
-                <div
-                    style={{
-                        clipPath:
-                            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                    }}
-                    className="aspect-1155/678 w-288.75 opacity-30"
-                />
+            <div className="mt-3 sm:mt-0 sm:ml-3">
+              <button
+                type="submit"
+                className={`inline-flex items-center px-4 py-2 rounded-md font-medium ${btn}`}
+              >
+                Subscribe
+              </button>
             </div>
+          </form>
         </div>
-    )
+
+        <p className={`mt-4 text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+          We respect your privacy. Unsubscribe at any time.
+        </p>
+      </div>
+    </section>
+  )
 }

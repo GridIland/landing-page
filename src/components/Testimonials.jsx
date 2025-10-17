@@ -1,8 +1,13 @@
+import { useTheme } from './Mode'
+
 export default function Example() {
+  const { isDark } = useTheme()
+
   return (
-    <section className="relative isolate overflow-hidden  px-6 py-24 sm:py-32 lg:px-8">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-500),transparent)] opacity-10" />
-      <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-gray-900 dark:bg-white shadow-xl ring-1 shadow-indigo-500/5 ring-white/5 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
+    <section className={isDark ? 'relative isolate overflow-hidden px-6 py-24 sm:py-32 lg:px-8 bg-gray-900 text-white' : 'relative isolate overflow-hidden px-6 py-24 sm:py-32 lg:px-8 bg-white text-gray-900'}>
+      <div className={isDark ? 'absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-500),transparent)] opacity-10' : 'absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-indigo-500),transparent)] opacity-10'} />
+      {/* inverted background shape: use dark bg in dark mode and light bg in light mode */}
+      <div className={isDark ? 'absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-gray-900 shadow-xl ring-1 shadow-indigo-500/5 ring-white/5 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center' : 'absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl ring-1 shadow-indigo-500/5 ring-gray-900/10 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center'} />
       <div className="mx-auto max-w-2xl lg:max-w-4xl">
         <img
           alt=""
@@ -10,7 +15,7 @@ export default function Example() {
           className="mx-auto h-12"
         />
         <figure className="mt-10">
-          <blockquote className="text-center text-xl/8 font-semibold text-gray-900 dark:text-white dark:text-white sm:text-2xl/9">
+          <blockquote className={isDark ? 'text-center text-xl/8 font-semibold text-white sm:text-2xl/9' : 'text-center text-xl/8 font-semibold text-gray-900 sm:text-2xl/9'}>
             <p>
               “Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias
               molestiae. Numquam corrupti in laborum sed rerum et corporis.”
@@ -23,11 +28,11 @@ export default function Example() {
               className="mx-auto size-10 rounded-full"
             />
             <div className="mt-4 flex items-center justify-center space-x-3 text-base">
-              <div className="font-semibold text-gray-900 dark:text-white dark:text-white">Judith Black</div>
-              <svg width={3} height={3} viewBox="0 0 2 2" aria-hidden="true" className="fill-white">
+              <div className={isDark ? 'font-semibold text-white' : 'font-semibold text-gray-900'}>Judith Black</div>
+              <svg width={3} height={3} viewBox="0 0 2 2" aria-hidden="true" className={isDark ? 'fill-white' : 'fill-gray-900'}>
                 <circle r={1} cx={1} cy={1} />
               </svg>
-              <div className="text-gray-400">CEO of Workcation</div>
+              <div className={isDark ? 'text-gray-400' : 'text-gray-500'}>CEO of Workcation</div>
             </div>
           </figcaption>
         </figure>

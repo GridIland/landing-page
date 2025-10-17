@@ -1,23 +1,24 @@
-import { useState } from 'react'
-import './App.css'
+import { ThemeProvider } from './components/Mode'
 import Navbar from './components/Navbar'
-import Prices from './components/Prices'
-import Team from './components/Team'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Team from './components/Team'
 import Newsletter from './components/Newsletter'
+import Testimonials from './components/Testimonials'
+import Prices from './components/Prices'
+import './App.css'
 
 function App() {
-  const [count] = useState(0)
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-gray-100 text-gray-900 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 dark:text-white">
-      {/* Navbar now contains the theme toggle */}
+    <ThemeProvider>
       <Navbar />
       <Prices />
+      <Testimonials />
       <Team />
+      <Contact />
       <Newsletter />
       <Footer />
-    </div>
+    </ThemeProvider>
   )
 }
 
